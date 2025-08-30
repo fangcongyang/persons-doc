@@ -1,0 +1,38 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "persons-doc",
+  "version": "0.1.0",
+  "identifier": "com.tauri.dev",
+  "build": {
+    "frontendDist": "../.vitepress/dist",
+    "devUrl": "http://localhost:5173",
+    "beforeDevCommand": "pnpm docs:dev",
+    "beforeBuildCommand": "pnpm docs:build"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "persons-doc",
+        "width": 1440,
+        "height": 840,
+        "resizable": true,
+        "fullscreen": false,
+        "center": true
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
+  }
+}

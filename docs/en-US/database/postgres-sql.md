@@ -1,0 +1,214 @@
+# 常用命令
+
+## 数据库连接参数
+
+```bash
+- reWriteBatchedInserts=true  # 批量插入时，将多个插入语句合并为一个
+```
+
+## 用户管理
+
+```sql
+
+// 创建用户
+CREATE USER user1 PASSWORD 'password';
+
+// 创建数据库 
+CREATE DATABASE testdb OWNER user1;
+```
+
+## 系统信息查询
+
+```sql
+## 修改pgsql密码
+ALTER USER postgres WITH PASSWORD '新密码';
+
+#查询所有表信息（排除以pg_, sql_开头的表名）
+select relname as tabname,cast(obj_description(relfilenode,'pg_class') as varchar) as comment from pg_class c 
+    where relname not like 'pg_%' and relname not like 'sql_%'
+
+#查询具体表的字段信息
+SELECT b.attname, b.type, d.description  
+    FROM (select a.attnum, a.attrelid,a.attname,concat_ws('',t.typname,SUBSTRING(format_type(a.atttypid,a.atttypmod) from '\(.*\)')) as type
+    from pg_class c, pg_attribute a, pg_type t
+    WHERE c.relname = #{表名} and a.attnum > 0 and a.attrelid = c.oid and a.atttypid = t.oid ) b LEFT JOIN pg_description d 
+    ON d.objoid=b.attrelid and d.objsubid=b.attnum
+
+
+```
+
+## 权限管理
+
+```sql
+## 赋予用户表操作权限
+ grant select,insert,update,delete on {表名} to {用户名};
+ 
+#批量授权某个模式下的所有表
+SELECT format('GRANT SELECT, INSERT, UPDATE, DELETE, TRUNCATE, REFERENCES, TRIGGER ON TABLE %I.%I TO %I;',
+              table_schema, table_name, 'fc_admin')
+FROM information_schema.tables
+WHERE table_schema = 'dmas_znkf';
+
+#赋予指定模式下所有表的权限
+DO $$ 
+DECLARE 
+    r RECORD;
+BEGIN
+    FOR r IN 
+        SELECT tablename FROM pg_tables WHERE schemaname = 'dmas_fc_audit' 
+    LOOP
+        EXECUTE format('GRANT ALL PRIVILEGES ON TABLE dmas_fc_audit.%I TO ylfwzb_rw;', r.tablename);
+    END LOOP;
+END $$;
+```
+
+## 常用函数
+
+```sql
+## 字符串切割函数 string_to_array
+string_to_array(work_scope, ';');
+
+## sql判断字段值是否包含 any
+SD.dict_value = any (string_to_array(work_scope, ';'))  
+
+## NULL转换函数
+IFNULL(expr1,expr2)
+
+## 字符串连接函数
+-- 函数拼接
+concat(expr1, expr2, ...) 
+-- ||拼接
+'%' || expr1 || '%'
+
+
+```
+
+## 数据库扩展模块
+
+### pgcrypto
+
+1. 开启数据库加解密模块
+
+:::tip
+
+数据库默认未启用且必须在public模式下开启才可以全局使用
+
+:::
+
+```sql
+    //开启加密模块
+    create extension pgcrypto;
+    //关闭加密模块
+    DROP EXTENSION pgcrypto;
+```
+
+> 使用示例
+
+```sql
+    //加密数据
+    SELECT encode(encrypt('{利福平}', {加密密码}, 'aes'), 'hex');
+    //解密数据
+    select convert_from(decrypt(decode('3b719cc506628ad9c35248b656f7ecb9', 'hex'), {解密密码},'aes'), 'SQL_ASCII');
+    //获取UUID
+    select gen_random_uuid();
+    //获取去掉-的UUID
+    select replace(gen_random_uuid()::text, '-', '');
+```
+
+### uuid-ossp
+
+1. 安装uuid拓展函数
+
+```sql
+    //开启加密模块
+    create extension uuid-ossp;
+    //关闭加密模块
+    DROP EXTENSION uuid-ossp;
+```
+
+> 使用示例，v1和v4都可以,v4的效率会慢一点
+
+```sql
+    //获取UUID
+    select uuid_generate_v1()
+    select uuid_generate_v4();
+    //获取去掉-的UUID
+    select replace(uuid_generate_v4()::text, '-', '');
+```
+
+## 数据库高级特性
+
+### 主键冲突更新
+
+主键冲突操作，需注意conflict里面的字段需要建立唯一索引
+
+> 冲突更新
+
+``` sql
+ON conflict(id)
+DO UPDATE SET group_num = '张三'
+```
+
+> 主键冲突不做任何操作
+
+```sql
+ON conflict(id) 
+DO NOTHINGON conflict(id)
+```
+
+## 问题排查
+
+### 数据库连接数过多
+
+1. 查看数据库连接数
+
+```sql
+    SELECT datname,numbackends FROM pg_stat_database;
+```
+
+2. 查看数据库连接数最多的用户
+
+```sql
+    SELECT usename,count(*) FROM pg_stat_activity GROUP BY usename ORDER BY count(*) DESC;
+```
+
+### 死锁
+
+1. 查看死锁
+
+```sql
+-- 查看死锁进程 未验证
+select * from pg_locks where mode='ExclusiveLock' and granted=false;
+
+-- 查看死锁进程 已验证
+SELECT 
+    pid AS procpid, 
+    datname, 
+    usename, 
+    query, 
+    state, 
+    wait_event_type, 
+    wait_event
+FROM 
+    pg_stat_activity 
+WHERE 
+    state IN ('active', 'waiting') 
+AND 
+    wait_event IS NOT NULL;
+```
+
+2. kill掉死锁进程
+
+```sql
+-- kill掉死锁进程
+select pg_terminate_backend(procpid);
+```
+
+### 数据写入方式查看
+
+```sql
+SELECT pid, query, state, query_start
+FROM pg_stat_activity
+WHERE query ~* '^\s*(INSERT|UPDATE|DELETE)'
+  AND state = 'active';
+```

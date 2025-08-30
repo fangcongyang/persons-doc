@@ -1,0 +1,42 @@
+{
+  "en-US": {
+    "env": {
+      "text": "快速开始",
+      "base": "/java/",
+      "children": [
+        {
+          "text": "环境搭建",
+          "link": "env"
+        }
+      ]
+    },
+    "commonly-used": {
+      "text": "常用代码",
+      "base": "/java/commonly-used/",
+      "children": [
+        {
+          "text": "JSON",
+          "link": "json"
+        },
+        {
+          "text": "Excel",
+          "link": "excel"
+        },
+        {
+          "text": "RxJava",
+          "link": "rxjava"
+        }
+      ]
+    },
+    "frequently-asked-questions": {
+      "text": "常见问题",
+      "base": "/java/frequently-asked-questions/",
+      "children": [
+        {
+          "text": "linux熵池不足",
+          "link": "insufficient-entropy-pool"
+        }
+      ]
+    }
+  }
+}

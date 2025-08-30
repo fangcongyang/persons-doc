@@ -1,0 +1,19 @@
+{
+  "en-US": [
+    {
+      "text": "java",
+      "link": "/java/env",
+      "activeMatch": "/java/"
+    },
+    {
+      "text": "Vue",
+      "link": "/vue/echarts-line",
+      "activeMatch": "/vue/"
+    },
+    {
+      "text": "数据库",
+      "link": "/database/postgres-install",
+      "activeMatch": "/database/"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "en-US": {
+    "echarts": {
+      "text": "Echarts",
+      "base": "/vue/echarts-",
+      "children": [
+        {
+          "text": "折线图",
+          "link": "line"
+        }
+      ]
+    }
+  }
+}
