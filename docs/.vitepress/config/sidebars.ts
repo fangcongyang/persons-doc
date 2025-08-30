@@ -1,6 +1,7 @@
 import { ensureLang } from '../utils/lang'
 import javaLocale from '../i18n/pages/java.json'
 import vueLocale from '../i18n/pages/vue.json'
+import databaseLocale from '../i18n/pages/database.json'
 
 function getJavaSidebar() {
   return Object.fromEntries(
@@ -11,7 +12,16 @@ function getJavaSidebar() {
   )
 }
 
-function getVueSideBar() {
+function getDatabaseSideBar() {
+  return Object.fromEntries(
+    Object.entries(databaseLocale).map(([lang, val]) => [
+      lang,
+      Object.values(val).map((item) => mapPrefix(item, lang, item.base)),
+    ])
+  )
+}
+
+function getVueSideBar() {  
   return Object.fromEntries(
     Object.entries(vueLocale).map(([lang, val]) => [
       lang,
@@ -26,6 +36,7 @@ const getSidebars = () => {
   return {
     '/java/': getJavaSidebar(),
     '/vue/': getVueSideBar(),
+    '/database/': getDatabaseSideBar(),
   }
 }
 

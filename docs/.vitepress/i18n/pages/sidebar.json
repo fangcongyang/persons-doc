@@ -12,7 +12,7 @@
     },
     {
       "text": "数据库",
-      "link": "/database/postgres-install",
+      "link": "/database/postgres/postgres-install",
       "activeMatch": "/database/"
     }
   ]

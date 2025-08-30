@@ -19,7 +19,6 @@ declare module 'vue' {
     DeprecatedTag: typeof import('./.vitepress/vitepress/components/dev/deprecated-tag.vue')['default']
     DesignGuide: typeof import('./.vitepress/vitepress/components/globals/design-guide.vue')['default']
     EfficiencySvg: typeof import('./.vitepress/vitepress/components/globals/design/efficiency-svg.vue')['default']
-    ElementPlusLogo: typeof import('./.vitepress/vitepress/components/icons/element-plus-logo.vue')['default']
     ElementPlusTextLogo: typeof import('./.vitepress/vitepress/components/icons/element-plus-text-logo.vue')['default']
     Expand: typeof import('./.vitepress/vitepress/components/icons/expand.vue')['default']
     FeedbackSvg: typeof import('./.vitepress/vitepress/components/globals/design/feedback-svg.vue')['default']

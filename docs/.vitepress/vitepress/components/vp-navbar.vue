@@ -36,9 +36,10 @@ const currentLink = computed(() => {
         <a :href="currentLink">
           <img
             class="logo"
-            src="/images/element-plus-logo.svg"
-            alt="Element Plus Logo"
+            src="/images/persons-logo.svg"
+            alt="Persons Logo"
           />
+          <span class="logo-text">f丿cy</span>
         </a>
       </div>
       <div class="content">
@@ -64,7 +65,16 @@ const currentLink = computed(() => {
   height: var(--header-height);
   > a {
     height: 28px;
-    width: 128px;
+    width: 88px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    logo-text {
+      font-size: 16px;
+      font-weight: 500;
+      color: #fff;
+    }
   }
   .logo {
     position: relative;

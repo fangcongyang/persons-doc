@@ -1,0 +1,18 @@
+{
+  "en-US": {
+    "postgres": {
+      "text": "PostgreSQL",
+      "base": "/database/postgres/",
+      "children": [
+        {
+          "text": "安装",
+          "link": "postgres-install"
+        },
+        {
+          "text": "常用sql",
+          "link": "postgres-sql"
+        }
+      ]
+    }
+  }
+}
