@@ -15,13 +15,26 @@ CREATE USER user1 PASSWORD 'password';
 
 // 创建数据库 
 CREATE DATABASE testdb OWNER user1;
+
+## 修改pgsql密码
+ALTER USER postgres WITH PASSWORD '新密码';
 ```
 
 ## 系统信息查询
 
 ```sql
-## 修改pgsql密码
-ALTER USER postgres WITH PASSWORD '新密码';
+# 查询连接限制和最大连接数
+SHOW max_connections;
+
+# 当前数据库的连接限制
+SELECT datname AS database_name, datconnlimit AS connection_limit
+FROM pg_database
+WHERE datname = 'your_database_name';
+```
+
+## 数据库信息查询
+
+```sql
 
 #查询所有表信息（排除以pg_, sql_开头的表名）
 select relname as tabname,cast(obj_description(relfilenode,'pg_class') as varchar) as comment from pg_class c 
@@ -34,7 +47,44 @@ SELECT b.attname, b.type, d.description
     WHERE c.relname = #{表名} and a.attnum > 0 and a.attrelid = c.oid and a.atttypid = t.oid ) b LEFT JOIN pg_description d 
     ON d.objoid=b.attrelid and d.objsubid=b.attnum
 
+```
 
+## 数据库状态查询
+
+### 数据库连接数查询
+
+```sql
+# 查询当前所有连接数
+SELECT COUNT(*) AS total_connections
+FROM pg_stat_activity;
+
+# 查询每个数据库的连接数
+SELECT datname AS database_name, COUNT(*) AS total_connections
+FROM pg_stat_activity
+GROUP BY datname
+ORDER BY total_connections DESC;
+
+# 查询每个用户的连接数
+SELECT usename AS user_name, COUNT(*) AS total_connections
+FROM pg_stat_activity
+GROUP BY usename
+ORDER BY total_connections DESC;
+```
+
+### 查询连接状态
+
+状态解释：
++ active：活动连接
++ idle：空闲连接
++ idle in transaction：连接处于事务中，但未执行操作。
++ idle in transaction (aborted)：连接处于事务中，但事务已被中止。
++ disabled：禁用连接
+
+```sql
+SELECT state, COUNT(*) AS total_connections
+FROM pg_stat_activity
+GROUP BY state
+ORDER BY total_connections DESC;
 ```
 
 ## 权限管理
@@ -211,4 +261,13 @@ SELECT pid, query, state, query_start
 FROM pg_stat_activity
 WHERE query ~* '^\s*(INSERT|UPDATE|DELETE)'
   AND state = 'active';
+```
+
+### sql性能排查
+
+1. 查看sql执行计划
+
+```sql
+EXPLAIN ANALYZE
+SELECT * FROM employees WHERE department_id = 20;
 ```
