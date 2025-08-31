@@ -67,3 +67,79 @@
 .doc-content .header-anchor:before {
   content: '#';
 }
+
+/* 表格样式 - 添加边框 */
+.doc-content table,
+.page-content table,
+.vp-doc table {
+  border-collapse: collapse;
+  margin: 20px 0;
+  width: 100%;
+  border: 1px solid #e2e8f0;
+}
+
+.doc-content table th,
+.doc-content table td,
+.page-content table th,
+.page-content table td,
+.vp-doc table th,
+.vp-doc table td {
+  border: 1px solid #e2e8f0;
+  padding: 8px 16px;
+  text-align: left;
+}
+
+.doc-content table th,
+.page-content table th,
+.vp-doc table th {
+  background-color: #f8fafc;
+  font-weight: 600;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.doc-content table tr:nth-child(even),
+.page-content table tr:nth-child(even),
+.vp-doc table tr:nth-child(even) {
+  background-color: #f9fafb;
+}
+
+.doc-content table tr:hover,
+.page-content table tr:hover,
+.vp-doc table tr:hover {
+  background-color: #f3f4f6;
+}
+
+/* 深色模式下的表格样式 */
+.dark .doc-content table,
+.dark .page-content table,
+.dark .vp-doc table {
+  border-color: #374151;
+}
+
+.dark .doc-content table th,
+.dark .doc-content table td,
+.dark .page-content table th,
+.dark .page-content table td,
+.dark .vp-doc table th,
+.dark .vp-doc table td {
+  border-color: #374151;
+}
+
+.dark .doc-content table th,
+.dark .page-content table th,
+.dark .vp-doc table th {
+  background-color: #1f2937;
+  border-bottom-color: #374151;
+}
+
+.dark .doc-content table tr:nth-child(even),
+.dark .page-content table tr:nth-child(even),
+.dark .vp-doc table tr:nth-child(even) {
+  background-color: #111827;
+}
+
+.dark .doc-content table tr:hover,
+.dark .page-content table tr:hover,
+.dark .vp-doc table tr:hover {
+  background-color: #1f2937;
+}

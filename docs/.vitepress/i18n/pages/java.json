@@ -10,6 +10,20 @@
         }
       ]
     },
+    "knowledge": {
+      "text": "知识点",
+      "base": "/java/knowledge/",
+      "children": [
+        {
+          "text": "Stream",
+          "link": "stream"
+        },
+        {
+          "text": "函数式编程",
+          "link": "functional-programming"
+        }
+      ]
+    },
     "commonly-used": {
       "text": "常用代码",
       "base": "/java/commonly-used/",
