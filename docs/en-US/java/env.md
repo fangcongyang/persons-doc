@@ -105,3 +105,120 @@ source /etc/profile
 # Step5.Do a test
 javac
 ```
+
+## 项目启动
+
+### 启动参数示例
+
+参数说明：
+
+- -server：指定使用服务器模式启动JVM，该模式下JVM会启用一些服务器端的优化，如垃圾回收器、线程管理等。
+- -Xms2g：指定JVM初始堆内存大小为2GB。
+- -Xmx2g：指定JVM最大堆内存大小为2GB。
+- -jar：指定要运行的JAR文件。
+- > nohup.out &：将JVM的输出重定向到nohup.out文件，并在后台运行。
+
+```bash
+## 普通项目启动
+nohup java -server -Xms2g -Xmx2g -jar arsenal-admin-1.0.0-20231024.014433-237.jar > nohup.out &
+## 加密项目启动
+nohup java -server -Xms8g -Xmx8g -DmonitorSecretKey=monitor -javaagent:xxx.jar="-pwd yh\$3641" -jar xxx.jar --server.port=8915 > xxx.out
+```
+
+### 启动脚本示例
+
++ 启动不设置参数
+
+```bash
+#!/bin/bash
+APP_HOME=`pwd`
+
+FILES=`ls`
+
+APP_NAME = ""
+
+for file in $FILES
+do
+	if [ ${file:0:24} = "fusion-engine-boot-mapdb" ]; then
+		echo $file
+		if [ ${file##*.} = "jar" ]; then
+			APP_NAME=$file
+		fi
+	fi
+done
+
+tpid=`ps -ef|grep $APP_NAME|grep -v grep|grep -v kill|awk '{print $2}'`
+if [ ${tpid} ]; then
+echo 'Stop Process...'
+kill -9 $tpid
+fi
+
+# 再次查看进程是否已结束
+tpid=`ps -ef|grep $APP_NAME|grep -v grep|grep -v kill|awk '{print $2}'`
+if [ ${tpid} ]; then
+echo 'Stop Process...'
+kill -9 $tpid
+else
+echo 'Stop Procecss Successfully!'
+echo 'start Procecss...'
+# 启动程序，简单的启动
+nohup java -server -Xms8g -Xmx8g -DmonitorSecretKey=monitor -javaagent:$APP_HOME/$APP_NAME="-pwd yh\$3641" -jar $APP_HOME/$APP_NAME --server.port=8915 > fusion-engine.out & echo "fusion engine is starting"
+
+# 动态查看日志文件
+tail -300f fusion-engine.out
+fi
+```
+
++ 启动设置参数
+
+```bash
+# 启动脚本
+#!/bin/bash
+APP_HOME=`pwd`
+
+FILES=`ls`
+
+APP_NAME = ""
+
+for file in $FILES
+do
+	if [ ${file:0:15} = "yhdcs-framework" ]; then
+		echo $file
+		if [ ${file##*.} = "jar" ]; then
+			APP_NAME=$file
+		fi
+	fi
+done
+
+tpid=`ps -ef|grep $APP_NAME|grep -v grep|grep -v kill|awk '{print $2}'`
+if [ ${tpid} ]; then
+echo 'Stop Process...'
+kill -9 $tpid
+fi
+
+# 再次查看进程是否已结束
+tpid=`ps -ef|grep $APP_NAME|grep -v grep|grep -v kill|awk '{print $2}'`
+if [ ${tpid} ]; then
+echo 'Stop Process...'
+kill -9 $tpid
+else
+echo 'Stop Procecss Successfully!'
+echo 'start Procecss...'
+# 启动程序，简单的启动
+nohup java -server -Xmx4096m -Xms2048m \
+ -XX:MetaspaceSize=128M -XX:MaxMetaspaceSize=256M \
+ -Dserver.port=8091 \
+ -jar "$APP_HOME/$APP_NAME" \
+ --JDBC.pageDialect=postgresql \
+ --JDBC.url="jdbc:postgresql://172.31.255.227:5588/mtt_ylfwzb_dev?currentSchema=yhdcs_ta404&useUnicode=true&characterEncoding=utf-8&characterSetResults=utf8" \
+ --JDBC.username=mtt_ylfwzb_dev \
+ --JDBC.password='mtt&ylfwzb@dev' \
+ --JDBC.driverClassName=org.postgresql.Driver \
+ --JDBC.validationQuery="select 1" \
+ --WEBSECURITY.default-src="'unsafe-inline' 'unsafe-eval' 'self' data: ws://ta404/webSocketServer http://127.0.0.1:* http://172.20.20.169:8091 http://172.20.20.169:8092" \
+ > yhdcs.out 2>&1 &
+
+# 动态查看日志文件
+tail -300f yhdcs.out
+fi
+```

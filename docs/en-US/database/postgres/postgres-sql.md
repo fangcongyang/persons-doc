@@ -271,3 +271,56 @@ WHERE query ~* '^\s*(INSERT|UPDATE|DELETE)'
 EXPLAIN ANALYZE
 SELECT * FROM employees WHERE department_id = 20;
 ```
+
+## 常用sql
+
+### 列转行
+
+```sql
+SELECT 
+    id AS patient_id,
+    'discharge' AS type,
+    v.disease_id,
+    v.disease_name,
+    v.is_main
+FROM patient_record p
+CROSS JOIN LATERAL (
+    VALUES
+        (dischargeDiseaseIdMain,   dischargeDiseaseNameMain,   true),
+        (dischargeDiseaseIdOther1, dischargeDiseaseNameOther1, false),
+        (dischargeDiseaseIdOther2, dischargeDiseaseNameOther2, false),
+        (dischargeDiseaseIdOther3, dischargeDiseaseNameOther3, false),
+        (dischargeDiseaseIdOther4, dischargeDiseaseNameOther4, false),
+        (dischargeDiseaseIdOther5, dischargeDiseaseNameOther5, false),
+        (dischargeDiseaseIdOther6, dischargeDiseaseNameOther6, false),
+        (dischargeDiseaseIdOther7, dischargeDiseaseNameOther7, false),
+        (dischargeDiseaseIdOther8, dischargeDiseaseNameOther8, false),
+        (dischargeDiseaseIdOther9, dischargeDiseaseNameOther9, false),
+        (dischargeDiseaseIdOther10, dischargeDiseaseNameOther10, false),
+        (dischargeDiseaseIdOther11, dischargeDiseaseNameOther11, false),
+        (dischargeDiseaseIdOther12, dischargeDiseaseNameOther12, false),
+        (dischargeDiseaseIdOther13, dischargeDiseaseNameOther13, false),
+        (dischargeDiseaseIdOther14, dischargeDiseaseNameOther14, false),
+        (dischargeDiseaseIdOther15, dischargeDiseaseNameOther15, false)
+) AS v(disease_id, disease_name, is_main)
+WHERE v.disease_id IS NOT NULL;
+```
+
+### 列拆分
+
+```sql
+SELECT 
+    id AS patient_id,
+    'admission' AS type,
+    arr_id[idx] AS disease_id,
+    arr_name[idx] AS disease_name,
+    (idx = 1) AS is_main
+FROM patient_record p
+CROSS JOIN LATERAL (
+    SELECT 
+        string_to_array(admissionDiseaseId, '|')   AS arr_id,
+        string_to_array(admissionDiseaseName, '|') AS arr_name
+) s
+CROSS JOIN LATERAL generate_subscripts(s.arr_id, 1) AS idx
+WHERE idx <= array_length(s.arr_name, 1)
+```
