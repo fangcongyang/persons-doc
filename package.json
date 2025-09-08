@@ -29,7 +29,9 @@
     "vite-plugin-mkcert": "^1.17.8",
     "vitepress": "1.6.3",
     "vitepress-plugin-group-icons": "^1.5.2",
-    "vitepress-plugin-llms": "^1.1.4"
+    "vitepress-plugin-llms": "^1.1.4",
+    "workbox-build": "^7.0.0",
+    "workbox-core": "^7.0.0"
   },
   "dependencies": {
     "@docsearch/css": "^3.9.0",
