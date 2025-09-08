@@ -14,6 +14,11 @@
       "text": "数据库",
       "link": "/database/postgres/postgres-install",
       "activeMatch": "/database/"
+    },
+    {
+      "text": "中间件",
+      "link": "/middleware/tomcat/base",
+      "activeMatch": "/middleware/"
     }
   ]
 }

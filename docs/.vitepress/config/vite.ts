@@ -2,7 +2,6 @@ import path from 'path'
 import Inspect from 'vite-plugin-inspect'
 import UnoCSS from 'unocss/vite'
 import mkcert from 'vite-plugin-mkcert'
-import glob from 'fast-glob'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import Components from 'unplugin-vue-components/vite'
 import Icons from 'unplugin-icons/vite'
@@ -10,8 +9,6 @@ import IconsResolver from 'unplugin-icons/resolver'
 import { loadEnv } from 'vitepress'
 import { groupIconVitePlugin } from 'vitepress-plugin-group-icons'
 import {
-  docPackage,
-  getPackageDependencies,
   projRoot,
 } from '../../build-utils'
 import { MarkdownTransform } from '../plugins/markdown-transform'

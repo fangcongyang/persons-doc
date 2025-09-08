@@ -2,12 +2,13 @@ import { ensureLang } from '../utils/lang'
 import javaLocale from '../i18n/pages/java.json'
 import vueLocale from '../i18n/pages/vue.json'
 import databaseLocale from '../i18n/pages/database.json'
+import middlewareLocale from '../i18n/pages/middleware.json'
 
 function getJavaSidebar() {
   return Object.fromEntries(
     Object.entries(javaLocale).map(([lang, val]) => [
       lang,
-      Object.values(val).map((item) => mapPrefix(item, lang, item.base)),
+      Object.values(val).map((item) => mapPrefix(item, lang, 'base' in item ? item.base : '')),
     ])
   )
 }
@@ -30,6 +31,15 @@ function getVueSideBar() {
   )
 }
 
+function getMiddlewareSideBar() {
+  return Object.fromEntries(
+    Object.entries(middlewareLocale).map(([lang, val]) => [
+      lang,
+      Object.values(val).map((item) => mapPrefix(item, lang, item.base)),
+    ])
+  )
+}
+
 // return sidebar with language configs.
 // this might create duplicated data but the overhead is ignorable
 const getSidebars = () => {
@@ -37,6 +47,7 @@ const getSidebars = () => {
     '/java/': getJavaSidebar(),
     '/vue/': getVueSideBar(),
     '/database/': getDatabaseSideBar(),
+    '/middleware/': getMiddlewareSideBar(),
   }
 }
 

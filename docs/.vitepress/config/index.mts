@@ -1,11 +1,6 @@
 
-import type { UserConfig } from 'vitepress'
+import type { HeadConfig, UserConfig } from 'vitepress'
 
-import {
-  groupIconMdPlugin,
-  groupIconVitePlugin,
-  localIconLoader
-} from 'vitepress-plugin-group-icons'
 import { languages } from '../utils/lang'
 import { mdPlugin } from './plugins'
 import { head } from './head'

@@ -1,0 +1,22 @@
+{
+  "en-US": {
+    "tomcat": {
+      "text": "Tomcat",
+      "base": "/middleware/tomcat/",
+      "children": [
+        {
+          "text": "基础",
+          "link": "base"
+        },
+        {
+          "text": "HTTPS",
+          "link": "https"
+        },
+        {
+          "text": "优化",
+          "link": "optimization"
+        }
+      ]
+    }
+  }
+}

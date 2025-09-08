@@ -1,7 +1,7 @@
 {
   "en-US": {
     "postgres": {
-      "text": "PostgreSQL",
+      "text": "Postgres",
       "base": "/database/postgres/",
       "children": [
         {
@@ -9,7 +9,7 @@
           "link": "postgres-install"
         },
         {
-          "text": "常用sql",
+          "text": "pg-sql",
           "link": "postgres-sql"
         }
       ]

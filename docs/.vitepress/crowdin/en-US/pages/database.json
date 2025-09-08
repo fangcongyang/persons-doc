@@ -1,0 +1,16 @@
+{
+  "postgres": {
+    "text": "Postgres",
+    "base": "/database/postgres/",
+    "children": [
+      {
+        "text": "安装",
+        "link": "postgres-install"
+      },
+      {
+        "text": "pg-sql",
+        "link": "postgres-sql"
+      }
+    ]
+  }
+}
