@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import chalk from 'chalk'
-import consola from 'consola'
+import { consola } from 'consola'
 import { docRoot, errorAndExit } from '../../build-utils'
 
 // NB: this file is only for generating files that enables developers to develop the website.
