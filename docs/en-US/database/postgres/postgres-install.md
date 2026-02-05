@@ -4,11 +4,71 @@
 
 [安装文件下载地址](https://yum.postgresql.org/rpmchart/)
 
-### 源码安装启停
+### 源码安装流程
+
+1、下载 PostgreSQL 源码
+
+可以从官方官网下载：
+
+```bash
+# 官网下载最新稳定版
+wget https://ftp.postgresql.org/pub/source/v16.2/postgresql-16.2.tar.gz
+
+# 解压源码
+tar -zxvf postgresql-16.2.tar.gz
+cd postgresql-16.2
+```
+
+2、配置编译选项
+
+!> 如果openssl、readline等基础组件未安装，可通过--with-out-openssl、--with-out-readline等选项跳过安装
+
+```bash
+./configure --prefix=/usr/local/pgsql \
+            --with-openssl \
+            --with-readline
+```
+
+注意：版本号根据你需要的版本选择。
+
+3、编译安装
+
+```bash
+make && make install
+```
+
+4、初始化数据库
+
+```bash
+# 创建 PostgreSQL 用户
+sudo useradd postgres
+sudo mkdir -p /u01/pgsql/data
+sudo chown postgres:postgres /u01/pgsql/data
+
+# 初始化数据库
+/usr/local/pgsql/bin/initdb -D /u01/pgsql/data
+```
+
+5、 源码安装启停
 
 ```sh
 - 启动命令：pg_ctl start -D {数据保存路径}
 - 停止命令：pg_ctl stop -D {数据保存路径}
+```
+
+6、添加环境变量（可选）
+
+```sh
+# 添加环境变量
+echo 'export PATH=/usr/local/pgsql/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
+```
+
+7、连接测试
+
+```sh
+# 连接测试
+psql -U postgres
 ```
 
 ### rpm安装启停
@@ -24,63 +84,69 @@
 
 ### 内存管理
 
-+ shared_buffers
-    + 含义：共享内存缓冲区大小，默认128MB
-    + 建议值：建议设置为物理内存的25%
-+ work_mem 工作内存大小，默认4MB
-    + 含义：指定每个查询操作（如排序、哈希连接）允许使用的内存大小
-    + 建议值：取决于查询的复杂性。可以根据每个查询的需求调整，通常从 16MB 到 128MB。
-+ maintenance_work_mem 维护工作内存大小，默认64MB
-    + 含义：维护操作（如VACUUM、CREATE INDEX）允许使用的内存大小
-    + 建议值：通常设置为 1-2 GB，特别是如果数据库有频繁的索引重建或清理操作。
-+ effective_cache_size 
-    + 含义：估算系统可用的缓存大小，影响查询计划选择。它帮助 PostgreSQL 的查询优化器判断索引是否有效。
-    + 建议值：数据库缓存的大小，建议设置为物理内存的 50~75%
+| 参数 | 功能 | 建议 |
+| -- | -- | -- |
+| shared_buffers | PostgreSQL 用于缓存表数据的内存大小 | PostgreSQL 用于缓存表数据的内存大小，默认128MB。通常设置为 总内存的 25%-40%，例如 16GB 内存 → 4~6GB | 
+| work_mem | 工作内存大小，默认4MB | 指定每个查询操作（如排序、哈希连接）允许使用的内存大小。取决于查询的复杂性。可以根据每个查询的需求调整，通常从 16MB 到 128MB。 |
+| maintenance_work_mem | 维护工作内存大小，默认64MB | 维护操作（如VACUUM、CREATE INDEX）允许使用的内存大小。通常设置为 1-2 GB，特别是如果数据库有频繁的索引重建或清理操作。 |
+| effective_cache_size | 估算系统可用的缓存大小，影响查询计划选择。它帮助 PostgreSQL 的查询优化器判断索引是否有效。 | 数据库缓存的大小，建议设置为物理内存的 50~75% |
 
 ### 并发控制和连接管理
 
-+ max_connections 
-    + 含义：指定允许的最大数据库连接数。过多的连接会增加上下文切换和内存占用。
-    + 建议值：设置为合理的连接数，不宜过大。可以使用连接池工具（如 PgBouncer）来管理连接数。
-+ max_worker_processes 最大工作进程数，默认8
-    + 含义：最大并发工作进程数，影响并行查询的能力。
-    + 建议值：根据系统的CPU核心数设置，例如，如果有 8 核CPU，可以将此值设置为 8 或更高。
-+ max_parallel_workers_per_gather 每个Gather节点最大并行工作进程数，默认2
-    + 含义：设置并行查询时每个查询操作允许的最大工作进程数。
-    + 建议值：通常设置为 2-4（如果你的数据库工作负载支持并行查询）。
+| 参数 | 功能 | 建议 |
+| -- | -- | -- |
+| max_connections | 指定允许的最大数据库连接数。过多的连接会增加上下文切换和内存占用。 | 设置为合理的连接数，不宜过大。可以使用连接池工具（如 PgBouncer）来管理连接数。 |
+| max_worker_processes | 最大工作进程数，默认8 | 根据系统的CPU核心数设置，例如，如果有 8 核CPU，可以将此值设置为 8 或更高。 |
+| max_parallel_workers_per_gather | 每个Gather节点最大并行工作进程数，默认2 | 设置并行查询时每个查询操作允许的最大工作进程数。通常设置为 2-4（如果你的数据库工作负载支持并行查询）。 |
 
 ### 磁盘 I/O 和写操作优化
 
-+ wal_buffers
-    + 含义：用于存储待写入 WAL (Write-Ahead Logging) 日志的缓冲区大小。适用于高写入负载的系统。
-    + 建议值：一般设置为 16MB 或更高。
-+ checkpoint_segments
-    + 含义：控制 PostgreSQL 在执行写入操作时需要刷新 checkpoint 的频率。较高的值可以减少 checkpoint 操作的频繁性，但也会增加数据库恢复时的恢复时间。
-    + 建议值：建议设置为 16-64（具体依据负载调整）。
-+ checkpoint_completion_target
-    + 含义：控制 checkpoint 完成的目标时间（即 checkpoint 操作的密集度）。
-    + 建议值：通常设置为 0.9 或更高，这样可以使 checkpoint 分布更加平滑。
+| 参数 | 功能 | 建议 |
+| -- | -- | -- |
+| wal_buffers | 用于存储待写入 WAL (Write-Ahead Logging) 日志的缓冲区大小。适用于高写入负载的系统。 | 建议值：一般设置为 16MB 或更高。 |
+| checkpoint_segments | 控制 PostgreSQL 在执行写入操作时需要刷新 checkpoint 的频率。较高的值可以减少 checkpoint 操作的频繁性，但也会增加数据库恢复时的恢复时间。 | 建议值：建议设置为 16-64（具体依据负载调整）。 |
+| checkpoint_completion_target | 控制 checkpoint 完成的目标时间（即 checkpoint 操作的密集度）。 | 建议值：通常设置为 0.9 或更高，这样可以使 checkpoint 分布更加平滑。 |
 
 ### 查询优化和计划选择
 
-+ random_page_cost
-    + 含义：估算随机磁盘页面访问的成本，用于查询优化器的决策。
-    + 建议值：通常设置为 1.1 - 2.0（在现代硬盘上），在 SSD 上可以设为 1.0。
-+ seq_page_cost
-    + 含义：估算顺序磁盘页面访问的成本。
-    + 建议值：通常设置为 1.0，表示顺序扫描和随机访问的成本是一样的。
-+ effective_io_concurrency
-    + 含义：允许的 I/O 并发数量，通常在使用SSD时需要调整这个参数来提高性能。
-    + 建议值：如果使用 SSD 存储，可以设置为 200-400。
+| 参数 | 功能 | 建议 |
+| -- | -- | -- |
+| random_page_cost | 估算随机磁盘页面访问的成本，用于查询优化器的决策。 | 建议值：通常设置为 1.1 - 2.0（在现代硬盘上），在 SSD 上可以设为 1.0。 |
+| seq_page_cost | 估算顺序磁盘页面访问的成本。 | 建议值：通常设置为 1.0，表示顺序扫描和随机访问的成本是一样的。 |
+| effective_io_concurrency | 允许的 I/O 并发数量，通常在使用SSD时需要调整这个参数来提高性能。 | 建议值：如果使用 SSD 存储，可以设置为 200-400。 |
 
 ### 日志和监控
 
-+ log_min_duration_statement
-    + 含义：记录执行时间超过指定值的语句的日志。
-    + 建议值：根据需要设置，例如 1000 毫秒（1 秒）。
-+ log_statement
-    + 含义：控制日志记录哪些 SQL 语句，none、ddl、mod、all。
-    + 建议值：根据需要设置，例如 ddl、mod、all。一般设置为 mod，记录所有修改操作的语句。
+| 参数 | 功能 | 建议 |
+| -- | -- | -- |
+| log_min_duration_statement | 记录执行时间超过指定值的语句的日志。 | 建议值：根据需要设置，例如 1000 毫秒（1 秒）。 |
+| log_statement | 控制日志记录哪些 SQL 语句，none、ddl、mod、all。 | 建议值：根据需要设置，例如 ddl、mod、all。一般设置为 mod，记录所有修改操作的语句。
+
+## 配置外网访问
+
+1、编辑 postgresql.conf 文件，一般路径如下：
+
+- Linux: `/etc/postgresql/<version>/main/postgresql.conf` 或 `/var/lib/pgsql/<version>/data/postgresql.conf`
+- UOS/RedHat: /var/lib/pgsql/data/postgresql.conf
+- 源码安装位置：/usr/local/pgsql/data/postgresql.conf 注意前面的路径为你创建的数据库路径
+
+2、修改配置
+
+```txt
+listen_addresses = '*'
+```
+
+3、配置访问控制（允许指定 IP）
+
+```txt
+host    all             all             0.0.0.0/0               md5
+```
+
+4、重启数据库服务
+
+```bash
+sudo systemctl restart postgresql
+```
 
 ## 导出与导入
 
@@ -175,3 +241,36 @@ ALTER USER postgres WITH PASSWORD 'xxx';
 如果修改不生效，很有可能就是修改后需要刷新权限，此时重新修改，输入flush privilege命名，但是会报错，然后在重新关闭。
 
 :::
+
+### error while loading shared libraries: libpq.so.5: cannot open shared object file: No such file or directory
+
+1. 查看libpq.so.5文件是否存在
+
+```bash
+find /usr -name "libpq.so*"
+
+## 输出结果如下
+(base) [root@lzsfpg16]# find /usr -name "libpq.so*"
+/usr/local/pg16/lib/libpq.so.5.16
+/usr/local/pg16/lib/libpq.so.5
+/usr/local/pg16/lib/libpq.so
+(base)[root@lzsf pg16]#
+```
+
+2. 配置环境变量
+
+```bash
+## 加入 ld.so 配置（永久生效）
+echo "/usr/local/pg16/lib" > /etc/ld.so.conf.d/pg16.conf
+ldconfig
+
+## 验证
+ldconfig -p | grep libpq
+
+## 输出结果如下
+(base) [root@lzsfpg16]# ldconfig -p | grep libpq
+        libpq.so.5 (libc6,x86-64) => /usr/local/pg16/lib/libpq.so.5
+        libpq.so (libc6,x86-64) => /usr/local/pg16/lib/libpq.so
+(base)[root@lzsf pg16]#
+```
+

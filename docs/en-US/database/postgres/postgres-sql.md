@@ -49,6 +49,30 @@ SELECT b.attname, b.type, d.description
 
 ```
 
+## 数据库性能优化参数
+
+```sql
+-- 临时建索引优化参数
+SET maintenance_work_mem = '10GB';
+SET max_parallel_maintenance_workers = 8;
+CREATE INDEX fee_list_d_fixmedins_code_idx ON fee_list_d USING btree (task_exe_log_id, fixmedins_code, mdtrt_sn);
+
+-- 临时查询写入sql优化参数
+SET local synchronous_commit = off;
+SET max_parallel_workers = 16;
+SET max_parallel_workers_per_gather = 8;
+insert into middle_library_fee_list_d 
+select bkkp_sn, fixmedins_code, fixmedins_name, mdtrt_sn, mdtrt_id, setl_id, fee_ocur_time, rx_drord_no, psn_no, psn_insu_rlts_id, insu_admdvs, pay_loc,
+	med_type, cnt, pric, det_item_fee_sumamt, pric_uplmt_amt, selfpay_prop, fulamt_ownpay_amt, overlmt_selfpay, preselfpay_amt, inscp_amt, 
+	cvlserv_bedfee_amt, medins_disc_amt, chrgitm_lv, hilist_code, hilist_name, list_type, medins_list_code, medins_list_name, med_chrgitm_type,
+	prodname, spec, dosform_name, bilg_dept_code, bilg_dept_name, bilg_dr_code, bilg_dr_name, acord_dept_code, acord_dept_name, acord_dr_code, 
+	acord_dr_name, lmt_used_flag, hosp_prep_flag, hosp_appr_flag, tcmdrug_used_way, prodplac_type, bas_medn_flag, hi_nego_drug_flag, prcu_drug_flag,
+	chld_medc_flag, etip_flag, etip_hosp_code, dscg_tkdrug_flag, list_sp_item_flag, matn_fee_flag, drt_reim_flag, reim_prop, oprn_oprt_code,
+	sin_dos_dscr, used_frqu_dscr, prd_days, medc_way_dscr, memo, vali_flag, updt_time, poolarea_no, rx_circ_flag, dise_code, dise_name, chrg_bchno,
+	init_feedetl_sn
+from fee_list_d
+```
+
 ## 数据库状态查询
 
 ### 数据库连接数查询

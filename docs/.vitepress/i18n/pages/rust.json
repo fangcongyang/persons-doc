@@ -1,0 +1,18 @@
+{
+  "en-US": {
+    "env": {
+      "text": "快速开始",
+      "base": "/rust/",
+      "children": [
+        {
+          "text": "快速开始",
+          "link": "rust-start-quickly"
+        },
+        {
+          "text": "cargo",
+          "link": "cargo"
+        }
+      ]
+    }
+  }
+}

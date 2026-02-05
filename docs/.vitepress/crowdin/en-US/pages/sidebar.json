@@ -5,6 +5,16 @@
     "activeMatch": "/java/"
   },
   {
+    "text": "rust",
+    "link": "/rust/rust-start-quickly",
+    "activeMatch": "/rust/"
+  },
+  {
+    "text": "system",
+    "link": "/system/linux/common-commands",
+    "activeMatch": "/system/"
+  },
+  {
     "text": "Vue",
     "link": "/vue/echarts-line",
     "activeMatch": "/vue/"

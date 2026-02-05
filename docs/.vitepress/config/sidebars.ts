@@ -1,5 +1,7 @@
 import { ensureLang } from '../utils/lang'
 import javaLocale from '../i18n/pages/java.json'
+import rustLocale from '../i18n/pages/rust.json'
+import systemLocale from '../i18n/pages/system.json'
 import vueLocale from '../i18n/pages/vue.json'
 import databaseLocale from '../i18n/pages/database.json'
 import middlewareLocale from '../i18n/pages/middleware.json'
@@ -13,6 +15,24 @@ function getJavaSidebar() {
   )
 }
 
+function getRustSidebar() {
+  return Object.fromEntries(
+    Object.entries(rustLocale).map(([lang, val]) => [
+      lang,
+      Object.values(val).map((item) => mapPrefix(item, lang, 'base' in item ? item.base : '')),
+    ])
+  )
+}
+
+function getSystemSidebar() {
+  return Object.fromEntries(
+    Object.entries(systemLocale).map(([lang, val]) => [
+      lang,
+      Object.values(val).map((item) => mapPrefix(item, lang, item.base)),
+    ])
+  )
+}
+
 function getDatabaseSideBar() {
   return Object.fromEntries(
     Object.entries(databaseLocale).map(([lang, val]) => [
@@ -22,7 +42,7 @@ function getDatabaseSideBar() {
   )
 }
 
-function getVueSideBar() {  
+function getVueSideBar() {
   return Object.fromEntries(
     Object.entries(vueLocale).map(([lang, val]) => [
       lang,
@@ -45,6 +65,8 @@ function getMiddlewareSideBar() {
 const getSidebars = () => {
   return {
     '/java/': getJavaSidebar(),
+    '/rust/': getRustSidebar(),
+    '/system/': getSystemSidebar(),
     '/vue/': getVueSideBar(),
     '/database/': getDatabaseSideBar(),
     '/middleware/': getMiddlewareSideBar(),

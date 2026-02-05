@@ -1,0 +1,14 @@
+{
+  "en-US": {
+    "system": {
+      "text": "System",
+      "base": "/system/linux/",
+      "children": [
+        {
+          "text": "常用命令",
+          "link": "common-commands"
+        }
+      ]
+    }
+  }
+}
