@@ -10,6 +10,11 @@
     "activeMatch": "/rust/"
   },
   {
+    "text": "Git",
+    "link": "/git/github-auth",
+    "activeMatch": "/git/"
+  },
+  {
     "text": "system",
     "link": "/system/linux/common-commands",
     "activeMatch": "/system/"

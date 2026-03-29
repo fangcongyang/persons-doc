@@ -1,0 +1,14 @@
+{
+  "en-US": {
+    "git": {
+      "text": "Git",
+      "base": "/git/",
+      "children": [
+        {
+          "text": "GitHub认证",
+          "link": "github-auth"
+        }
+      ]
+    }
+  }
+}
