@@ -17,6 +17,16 @@
           "link": "optimization"
         }
       ]
+    },
+    "redis": {
+      "text": "Redis",
+      "base": "/middleware/redis/",
+      "children": [
+        {
+          "text": "源码安装",
+          "link": "install-from-source"
+        }
+      ]
     }
   }
 }
