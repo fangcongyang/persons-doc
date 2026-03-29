@@ -10,6 +10,10 @@
       {
         "text": "常见问题",
         "link": "common-faq"
+      },
+      {
+        "text": "Docker镜像源",
+        "link": "docker-mirror"
       }
     ]
   }

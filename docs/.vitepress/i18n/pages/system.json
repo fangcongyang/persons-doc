@@ -7,6 +7,10 @@
         {
           "text": "常用命令",
           "link": "common-commands"
+        },
+        {
+          "text": "Docker镜像源",
+          "link": "docker-mirror"
         }
       ]
     }
