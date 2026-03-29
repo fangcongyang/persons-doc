@@ -1,0 +1,18 @@
+{
+  "en-US": {
+    "node": {
+      "text": "Node.js",
+      "base": "/node/",
+      "children": [
+        {
+          "text": "Node安装",
+          "link": "node-install"
+        },
+        {
+          "text": "pnpm发布",
+          "link": "pnpm-publish"
+        }
+      ]
+    }
+  }
+}

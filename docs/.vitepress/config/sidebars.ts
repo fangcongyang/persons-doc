@@ -6,6 +6,7 @@ import vueLocale from "../i18n/pages/vue.json";
 import databaseLocale from "../i18n/pages/database.json";
 import middlewareLocale from "../i18n/pages/middleware.json";
 import gitLocale from "../i18n/pages/git.json";
+import nodeLocale from "../i18n/pages/node.json";
 
 function getJavaSidebar() {
   return Object.fromEntries(
@@ -70,6 +71,15 @@ function getMiddlewareSideBar() {
   );
 }
 
+function getNodeSidebar() {
+  return Object.fromEntries(
+    Object.entries(nodeLocale).map(([lang, val]) => [
+      lang,
+      Object.values(val).map((item) => mapPrefix(item, lang, item.base)),
+    ])
+  );
+}
+
 // return sidebar with language configs.
 // this might create duplicated data but the overhead is ignorable
 const getSidebars = () => {
@@ -79,6 +89,7 @@ const getSidebars = () => {
     "/git/": getGitSidebar(),
     "/system/": getSystemSidebar(),
     "/vue/": getVueSideBar(),
+    "/node/": getNodeSidebar(),
     "/database/": getDatabaseSideBar(),
     "/middleware/": getMiddlewareSideBar(),
   };
