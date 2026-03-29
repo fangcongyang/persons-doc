@@ -11,6 +11,10 @@
         {
           "text": "Docker镜像源",
           "link": "docker-mirror"
+        },
+        {
+          "text": "WSL迁移",
+          "link": "wsl-migration"
         }
       ]
     }
