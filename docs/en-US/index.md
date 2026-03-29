@@ -1,9 +1,9 @@
 ---
-title: 飞检部署文档
+title: f丿cy知识文档
 page: true
 lang: en-US
 ---
 
 <ClientOnly>
-  <ParallaxHome />
+  <KnowledgeHome />
 </ClientOnly>
