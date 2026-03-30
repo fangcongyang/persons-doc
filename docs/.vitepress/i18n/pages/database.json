@@ -11,6 +11,10 @@
         {
           "text": "pg-sql",
           "link": "postgres-sql"
+        },
+        {
+          "text": "EXPLAIN详解",
+          "link": "explain-analyze"
         }
       ]
     }
