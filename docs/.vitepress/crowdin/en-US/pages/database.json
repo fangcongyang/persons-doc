@@ -12,5 +12,15 @@
         "link": "postgres-sql"
       }
     ]
+  },
+  "oracle": {
+    "text": "Oracle",
+    "base": "/database/oracle/",
+    "children": [
+      {
+        "text": "oracle-sql",
+        "link": "oracle-sql"
+      }
+    ]
   }
 }
