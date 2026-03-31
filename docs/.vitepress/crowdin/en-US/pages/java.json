@@ -1,52 +1,54 @@
 {
-  "en-US": {
-    "env": {
-      "text": "快速开始",
-      "base": "/java/",
-      "children": [
-        {
-          "text": "环境搭建",
-          "link": "env"
-        }
-      ]
-    },
-    "commonly-used": {
-      "text": "常用代码",
-      "base": "/java/commonly-used/",
-      "children": [
-        {
-          "text": "JSON",
-          "link": "json"
-        },
-        {
-          "text": "Excel",
-          "link": "excel"
-        }
-      ]
-    },
-    "knowledge": {
-      "text": "Java 知识",
-      "base": "/java/knowledge/",
-      "children": [
-        {
-          "text": "函数式编程",
-          "link": "functional-programming"
-        },
-        {
-          "text": "Stream",
-          "link": "stream"
-        }
-      ]
-    },
-    "performance": {
-      "text": "性能调优",
-      "base": "/java/performance/",
-      "children": [
-        {
-          "text": "线程与内存分析",
-          "link": "thread-memory-analysis"
-        }
-      ]
-    }
+  "env": {
+    "text": "快速开始",
+    "base": "/java/",
+    "children": [
+      {
+        "text": "环境搭建",
+        "link": "env"
+      }
+    ]
+  },
+  "commonly-used": {
+    "text": "常用代码",
+    "base": "/java/commonly-used/",
+    "children": [
+      {
+        "text": "JSON",
+        "link": "json"
+      },
+      {
+        "text": "Excel",
+        "link": "excel"
+      }
+    ]
+  },
+  "knowledge": {
+    "text": "Java 知识",
+    "base": "/java/knowledge/",
+    "children": [
+      {
+        "text": "函数式编程",
+        "link": "functional-programming"
+      },
+      {
+        "text": "Stream",
+        "link": "stream"
+      },
+      {
+        "text": "线程池",
+        "link": "thread-pool"
+      }
+    ]
+  },
+  "performance": {
+    "text": "性能调优",
+    "base": "/java/performance/",
+    "children": [
+      {
+        "text": "线程与内存分析",
+        "link": "thread-memory-analysis"
+      }
+    ]
   }
 }
