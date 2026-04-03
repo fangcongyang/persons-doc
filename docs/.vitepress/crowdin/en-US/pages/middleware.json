@@ -24,6 +24,10 @@
       {
         "text": "源码安装",
         "link": "install-from-source"
+      },
+      {
+        "text": "哨兵模式",
+        "link": "sentinel"
       }
     ]
   }
