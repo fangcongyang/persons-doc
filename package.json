@@ -9,6 +9,8 @@
   },
   "devDependencies": {
     "@docsearch/react": "^3.9.0",
+    "rimraf": "^6.0.1",
+    "tsx": "^4.19.4",
     "@iconify-json/ri": "^1.2.5",
     "@lunariajs/core": "^0.1.1",
     "@mdit-vue/shared": "^2.1.4",
