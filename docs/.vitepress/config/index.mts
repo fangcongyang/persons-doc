@@ -50,6 +50,7 @@ const setupConfig = (configEnv) => {
     const config: UserConfig<any> = {
       title: "persons-doc",
       description: "A persons doc",
+      base: '/persons-doc/',
       vite: getViteConfig(configEnv),
       markdown: {
         // math: true, // 支持tex语法
