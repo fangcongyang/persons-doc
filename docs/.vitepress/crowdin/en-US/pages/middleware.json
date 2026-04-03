@@ -40,5 +40,15 @@
         "link": "index"
       }
     ]
+  },
+  "nginx": {
+    "text": "Nginx",
+    "base": "/middleware/nginx/",
+    "children": [
+      {
+        "text": "安装配置",
+        "link": "install-config"
+      }
+    ]
   }
 }
