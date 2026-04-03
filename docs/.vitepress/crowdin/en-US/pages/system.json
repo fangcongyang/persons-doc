@@ -22,6 +22,10 @@
       {
         "text": "日志管理脚本",
         "link": "log-management-scripts"
+      },
+      {
+        "text": "FFmpeg安装使用",
+        "link": "ffmpeg"
       }
     ]
   },

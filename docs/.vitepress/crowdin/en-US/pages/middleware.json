@@ -58,6 +58,10 @@
       {
         "text": "安装配置",
         "link": "install-config"
+      },
+      {
+        "text": "常见问题",
+        "link": "troubleshooting"
       }
     ]
   }
