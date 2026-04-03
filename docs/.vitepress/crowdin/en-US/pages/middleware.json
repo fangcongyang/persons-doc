@@ -50,5 +50,15 @@
         "link": "install-config"
       }
     ]
+  },
+  "rabbitmq": {
+    "text": "RabbitMQ",
+    "base": "/middleware/rabbitmq/",
+    "children": [
+      {
+        "text": "安装配置",
+        "link": "install-config"
+      }
+    ]
   }
 }
