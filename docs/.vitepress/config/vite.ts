@@ -74,7 +74,7 @@ export const getViteConfig = ({ mode }: { mode: string }): ViteConfig => {
       Inspect(),
       groupIconVitePlugin(),
       llmstxt({
-        workDir: 'zh',
+        workDir: 'en-US',
         ignoreFiles: ['index.md']
       }),
       env.HTTPS ? (mkcert() as Plugin) : undefined,
