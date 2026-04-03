@@ -1,6 +1,6 @@
 {
-  "system": {
-    "text": "System",
+  "linux": {
+    "text": "Linux",
     "base": "/system/linux/",
     "children": [
       {
@@ -22,6 +22,16 @@
       {
         "text": "日志管理脚本",
         "link": "log-management-scripts"
+      }
+    ]
+  },
+  "windows": {
+    "text": "Windows",
+    "base": "/system/windows/",
+    "children": [
+      {
+        "text": "常用命令",
+        "link": "common-commands"
       }
     ]
   }

@@ -30,5 +30,15 @@
         "link": "sentinel"
       }
     ]
+  },
+  "kafka": {
+    "text": "Kafka",
+    "base": "/middleware/kafka/",
+    "children": [
+      {
+        "text": "入门",
+        "link": "index"
+      }
+    ]
   }
 }
