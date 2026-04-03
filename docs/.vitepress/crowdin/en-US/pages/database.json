@@ -10,6 +10,10 @@
       {
         "text": "pg-sql",
         "link": "postgres-sql"
+      },
+      {
+        "text": "pgvector安装",
+        "link": "pgvector-install"
       }
     ]
   },
