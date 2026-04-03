@@ -19,6 +19,10 @@
         {
           "text": "WSL迁移",
           "link": "wsl-migration"
+        },
+        {
+          "text": "日志管理脚本",
+          "link": "log-management-scripts"
         }
       ]
     }
