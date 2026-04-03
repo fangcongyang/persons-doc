@@ -13,8 +13,18 @@
           "link": "postgres-sql"
         },
         {
-          "text": "EXPLAIN详解",
-          "link": "explain-analyze"
+          "text": "pgvector安装",
+          "link": "pgvector-install"
+        }
+      ]
+    },
+    "oracle": {
+      "text": "Oracle",
+      "base": "/database/oracle/",
+      "children": [
+        {
+          "text": "oracle-sql",
+          "link": "oracle-sql"
         }
       ]
     }
