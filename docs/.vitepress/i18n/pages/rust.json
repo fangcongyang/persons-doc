@@ -11,6 +11,10 @@
         {
           "text": "cargo",
           "link": "cargo"
+        },
+        {
+          "text": "Tauri GitHub打包与自动更新",
+          "link": "tauri-github-release"
         }
       ]
     }
