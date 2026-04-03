@@ -1,0 +1,12 @@
+{
+  "http": {
+    "text": "HTTP",
+    "base": "/web/http-",
+    "children": [
+      {
+        "text": "预检请求",
+        "link": "preflight-request"
+      }
+    ]
+  }
+}
