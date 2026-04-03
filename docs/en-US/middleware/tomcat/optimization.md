@@ -12,7 +12,7 @@
 <!-- <Connector port="8009" protocol="AJP/1.3" redirectPort="8443" /> -->
 ```
 重启tomcat，查看效果。可以看到AJP服务已经不存在了。
-![](./image/optimization/tomcat1.png)
+![](./images/optimization/tomcat1.png)
 
 ### 执行器（线程池）
 在tomcat中每一个用户请求都是一个线程，所以可以使用线程池提高性能。
@@ -38,7 +38,7 @@ maxQueueSize，最大的等待队列数，超过则拒绝请求
 ```
 保存退出，重启tomcat，查看效果。
 
-![](./image/optimization/tomcat2.png)
+![](./images/optimization/tomcat2.png)
 
 在页面中显示最大线程数为-1，这个是正常的，仅仅是显示的问题，实际使用的是指定的值。如果配置了一个Executor，则该属性的任何值将被正确记录，但是它将被显示为-1
 
@@ -79,7 +79,7 @@ apr
                redirectPort="8443" />
 ```
 
-![](./image/optimization/tomcat3.png)
+![](./images/optimization/tomcat3.png)
 
 可以看到已经设置为nio2了。
 
@@ -99,7 +99,7 @@ apr
 
 ```
 
-![](./image/optimization/tomcat4.png)
+![](./images/optimization/tomcat4.png)
 
 经过9次测试，测试结果如下705 725 702 729 733 738 735 728 平均是724
 
@@ -165,7 +165,7 @@ apr
 
 ```
 
-![](./image/optimization/tomcat5.png)
+![](./images/optimization/tomcat5.png)
 
 测试结果：
 - 平均响应时间：0.438秒，响应时间明显缩短

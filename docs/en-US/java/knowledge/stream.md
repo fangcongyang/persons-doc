@@ -16,7 +16,7 @@ Stream 是 Java8 中处理集合的关键抽象概念，它可以指定你希望
 
 ## 分类
 
-![](./image/steamClassify.png)
+![](../image/steamClassify.png)
 
 无状态：指元素的处理不受之前元素的影响；
 

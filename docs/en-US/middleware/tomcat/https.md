@@ -156,23 +156,23 @@ at org.apache.catalina.connector.Connector.initInternal(Connector.java:981)
 ```
 使用IE浏览器访问 https://www.bo.org 页面提示：
 
-![](./image/https/tomcat1.png)
+![](./images/https/tomcat1.png)
 
 选择继续浏览方可打开tomcat主页，但是会提示证书有问题：
 
-![](./image/https/tomcat2.png)
+![](./images/https/tomcat2.png)
 
 使用火狐浏览器访问 https://www.bo.org 页面提示：
 
-![](./image/https/tomcat3.png)
+![](./images/https/tomcat3.png)
 
 选择添加例外继续浏览，出现tomcat主页：
 
-![](./image/https/tomcat4.png)
+![](./images/https/tomcat4.png)
 
 打开火狐浏览器证书管理页面发现已经将"www.bo.org"的证书添加到例外信任证书列表：
 
-![](./image/https/tomcat5.png)
+![](./images/https/tomcat5.png)
 
 ## 导入证书到客户端
 
@@ -190,17 +190,17 @@ keytool -exportcert -alias www.bo.org -keystore d:\keystore\bo.keystore -file d:
 2）客户端导入证书(链)
 打开IE浏览器的Internet选项  ----> 内容  ----> 证书
 
-![](./image/https/tomcat6.png)
+![](./images/https/tomcat6.png)
 
 选择"受信任的根证书颁发机构"  ----> 导入证书
 
-![](./image/https/tomcat7.png)
+![](./images/https/tomcat7.png)
 
 将之前生成的证书导入进来，其余的步骤直接下一步即可
 
-![](./image/https/tomcat8.png)
+![](./images/https/tomcat8.png)
 
-![](./image/https/tomcat9.png)
+![](./images/https/tomcat9.png)
 
 ## 配置https双向认证
 
@@ -288,33 +288,33 @@ KeyIdentifier [
 
 重启tomcat，浏览器访问 https://www.bo.org，页面提示：
 
-![](./image/https/tomcat10.png)
+![](./images/https/tomcat10.png)
 
 这是因为浏览器客户端还未安装身份证书，将上面生成的"client.p12"安全证书安装到火狐浏览器，打开选项-隐私与安全-查看证书界面，选择"您的证书"并导入：
 
-![](./image/https/tomcat11.png)
+![](./images/https/tomcat11.png)
 
 提示“请输入被用来加密此证书备份的密码”时随便输入一个即可，导入后界面如下：
 
-![](./image/https/tomcat12.png)
+![](./images/https/tomcat12.png)
 
 再次访问https://www.bo.org恢复正常：
 
-![](./image/https/tomcat13.png)
+![](./images/https/tomcat13.png)
 
 IE浏览器安装客户端身份证书步骤：
 
 双击client.p12文件安装或者在IE浏览器中"Internet选项 - 内容 - 证书 - 个人" 选项卡导入，然后一路next，私钥密码随便即可：
 
-![](./image/https/tomcat14.png)
+![](./images/https/tomcat14.png)
 
 IE地址栏输入https://www.bo.org，提示“确认证书”（可能存在多个身份证书），选择刚才导入的证书即可并确认：
 
-![](./image/https/tomcat15.png)
+![](./images/https/tomcat15.png)
 
 正确跳转到tomcat主页面，地址栏显示小锁头安全标志： 
 
-![](./image/https/tomcat16.png)
+![](./images/https/tomcat16.png)
 
 ## 配置http自动跳转https
 
