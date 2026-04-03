@@ -7,6 +7,7 @@ import databaseLocale from "../i18n/pages/database.json";
 import middlewareLocale from "../i18n/pages/middleware.json";
 import gitLocale from "../i18n/pages/git.json";
 import nodeLocale from "../i18n/pages/node.json";
+import webLocale from "../i18n/pages/web.json";
 
 // return sidebar for a specific category
 function getSidebar(localeData: any, category: string, base?: string) {
@@ -29,6 +30,7 @@ export const getSidebars = () => {
     "/node/": getSidebar(nodeLocale, "node"),
     "/database/": getSidebar(databaseLocale, "database"),
     "/middleware/": getSidebar(middlewareLocale, "middleware"),
+    "/web/": getSidebar(webLocale, "web"),
   };
 };
 

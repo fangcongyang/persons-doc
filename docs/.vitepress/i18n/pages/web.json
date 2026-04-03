@@ -1,0 +1,32 @@
+{
+  "en-US": {
+    "css": {
+      "text": "CSS 相关",
+      "base": "/web/",
+      "children": [
+        {
+          "text": "Flex 布局",
+          "link": "flex-layout"
+        },
+        {
+          "text": "box-shadow",
+          "link": "box-shadow"
+        },
+        {
+          "text": "CSS 资源",
+          "link": "css-resources"
+        }
+      ]
+    },
+    "http": {
+      "text": "HTTP 相关",
+      "base": "/web/",
+      "children": [
+        {
+          "text": "预检请求",
+          "link": "http-preflight-request"
+        }
+      ]
+    }
+  }
+}
