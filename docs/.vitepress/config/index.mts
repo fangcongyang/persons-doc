@@ -1,9 +1,9 @@
 
 import type { HeadConfig, UserConfig } from 'vitepress'
 
-import { languages } from '../utils/lang'
+import { languages, base } from '../utils/lang'
 import { mdPlugin } from './plugins'
-import { head } from './head'
+import { createHead } from './head'
 import { nav } from './nav'
 import { sidebars } from './sidebars'
 import { getViteConfig } from './vite'
@@ -50,7 +50,7 @@ const setupConfig = (configEnv) => {
     const config: UserConfig<any> = {
       title: "persons-doc",
       description: "A persons doc",
-      base: '/persons-doc/',
+      base,
       vite: getViteConfig(configEnv),
       markdown: {
         // math: true, // 支持tex语法
@@ -102,7 +102,7 @@ const setupConfig = (configEnv) => {
       // md.use(groupIconMdPlugin)
     // }
   },
-  head,
+  head: createHead(base),
   themeConfig: {
     logo: { src: '../vitepress-logo-mini.svg', width: 24, height: 24 },
 

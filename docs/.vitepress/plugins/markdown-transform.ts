@@ -64,18 +64,19 @@ const combineMarkdown = (
   headers: string[],
   footers: string[]
 ) => {
-  const frontmatterEnds = code.indexOf('---\r\n\r\n')
+  const frontmatterMatch = code.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?/)
+  const frontmatterEnds = frontmatterMatch ? frontmatterMatch[0].length : 0
   const firstHeader = code.search(/\n#{1,6}\s.+/)
   const sliceIndex =
     firstHeader < 0
-      ? frontmatterEnds < 0
-        ? 0
-        : frontmatterEnds + 4
+      ? frontmatterEnds
       : firstHeader
 
-  if (headers.length > 0)
+  if (headers.length > 0) {
+    const headerCode = headers.join('\n') + '\n'
     code =
-      code.slice(0, sliceIndex) + headers.join('\n') + code.slice(sliceIndex)
+      code.slice(0, sliceIndex) + headerCode + code.slice(sliceIndex)
+  }
   code += footers.join('\n')
 
   return `${code}\n`
@@ -91,8 +92,8 @@ const transformVpScriptSetup = (code: string, append: Append) => {
   return code
 }
 
-const GITHUB_BLOB_URL = `https://github.com/element-plus/element-plus/blob/dev`
-const GITHUB_TREE_URL = `https://github.com/element-plus/element-plus/blob/dev`
+const GITHUB_BLOB_URL = `https://github.com/fangcongyang/persons-doc/blob/dev`
+const GITHUB_TREE_URL = `https://github.com/fangcongyang/persons-doc/blob/dev`
 const transformComponentMarkdown = (
   id: string,
   componentId: string,

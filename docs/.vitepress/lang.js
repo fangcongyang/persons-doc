@@ -13,9 +13,11 @@
     : defaultLang
   localStorage.setItem(cacheKey, language)
   userPreferredLang = language
-  if (!location.pathname.startsWith(`/${userPreferredLang}`)) {
-    const toPath = [`/${userPreferredLang}`]
-      .concat(location.pathname.split('/').slice(2))
+  const base = '{{BASE}}'
+  if (!location.pathname.startsWith(`${base}${userPreferredLang}`)) {
+    const baseParts = base.split('/').filter(Boolean)
+    const toPath = [`${base}${userPreferredLang}`]
+      .concat(location.pathname.split('/').slice(baseParts.length + 2))
       .join('/')
     location.pathname =
       toPath.endsWith('.html') || toPath.endsWith('/')

@@ -15,17 +15,10 @@ defineProps<{
 
 defineEmits(['toggle'])
 
-const { theme, page } = useData()
+const { theme, lang, site, localeIndex } = useData()
 
 const currentLink = computed(() => {
-  if (!inBrowser) {
-    return `/${page.value?.frontmatter?.lang || ''}/`
-  }
-  const existLangIndex = theme.value.langs.findIndex((lang) =>
-    window?.location?.pathname.startsWith(`/${lang}`)
-  )
-
-  return existLangIndex === -1 ? '/' : `/${theme.value.langs[existLangIndex]}/`
+  return `${site.value.base}${lang.value}/`
 })
 </script>
 
@@ -36,7 +29,7 @@ const currentLink = computed(() => {
         <a :href="currentLink">
           <img
             class="logo"
-            src="/images/persons-logo.svg"
+            :src="`${site.base}images/persons-logo.svg`"
             alt="Persons Logo"
           />
           <span class="logo-text">f丿cy</span>
@@ -70,10 +63,9 @@ const currentLink = computed(() => {
     align-items: center;
     justify-content: space-between;
 
-    logo-text {
+    .logo-text {
       font-size: 16px;
       font-weight: 500;
-      color: #fff;
     }
   }
   .logo {
