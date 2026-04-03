@@ -52,6 +52,10 @@ const setupConfig = (configEnv) => {
       description: "A persons doc",
       base,
       vite: getViteConfig(configEnv),
+      ignoreDeadLinks: [
+        /^https?:\/\/localhost/,
+        /^https?:\/\/127\.0\.0\.1/,
+      ],
       markdown: {
         // math: true, // 支持tex语法
         // lineNumbers: true,
