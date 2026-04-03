@@ -18,6 +18,10 @@
       {
         "text": "PBKDF2 SCRAM错误解决",
         "link": "pbkdf2-scram-error"
+      },
+      {
+        "text": "pg_stat_io 深入分析",
+        "link": "pg-stat-io"
       }
     ]
   },
