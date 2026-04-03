@@ -8,9 +8,9 @@
     "theme-chalk",
     "theme-light"
   ],
-  "homepage": "https://github.com/element-plus/element-plus/blob/dev/packages/theme-chalk/README.md",
+  "homepage": "https://github.com/fangcongyang/persons-doc/blob/dev/packages/theme-chalk/README.md",
   "bugs": {
-    "url": "https://github.com/element-plus/element-plus#issues"
+    "url": "https://github.com/fangcongyang/persons-doc#issues"
   },
   "license": "MIT",
   "author": "yi.shyang@ele.me",
@@ -19,7 +19,7 @@
   "jsdelivr": "index.css",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/element-plus/element-plus.git"
+    "url": "git+https://github.com/fangcongyang/persons-doc.git"
   },
   "style": "index.css",
   "scripts": {

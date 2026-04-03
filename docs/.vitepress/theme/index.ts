@@ -22,8 +22,6 @@ export default define<Theme>({
       const ElementPlusIconsVue = (await import("@element-plus/icons-vue"))
       const { ID_INJECTION_KEY } = await import("element-plus")
       
-      await import("element-plus/dist/index.css")
-      
       app.use(ElementPlus)
       
       // 提供 ID_INJECTION_KEY

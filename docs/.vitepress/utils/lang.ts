@@ -4,6 +4,8 @@ import { docRoot } from '../../build-utils'
 
 export const languages = fs.readdirSync(path.resolve(__dirname, '../crowdin'))
 
+export const base = '/persons-doc/'
+
 export const ensureLang = (lang: string) => `/${lang}`
 
 export const getLang = (id: string) =>

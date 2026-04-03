@@ -1,7 +1,7 @@
 
 import type { HeadConfig, UserConfig } from 'vitepress'
 
-import { languages } from '../utils/lang'
+import { languages, base } from '../utils/lang'
 import { mdPlugin } from './plugins'
 import { createHead } from './head'
 import { nav } from './nav'
@@ -47,7 +47,6 @@ languages.forEach((lang) => {
 
 // https://vitepress.dev/reference/site-config
 const setupConfig = (configEnv) => {
-    const base = '/persons-doc/'
     const config: UserConfig<any> = {
       title: "persons-doc",
       description: "A persons doc",
