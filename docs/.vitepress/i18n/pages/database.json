@@ -15,6 +15,10 @@
         {
           "text": "pgvector安装",
           "link": "pgvector-install"
+        },
+        {
+          "text": "PBKDF2 SCRAM错误解决",
+          "link": "pbkdf2-scram-error"
         }
       ]
     },
