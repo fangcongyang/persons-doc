@@ -38,6 +38,10 @@
       {
         "text": "入门",
         "link": "index"
+      },
+      {
+        "text": "Spring集成",
+        "link": "spring-integration"
       }
     ]
   },
