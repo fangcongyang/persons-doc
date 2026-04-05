@@ -27,6 +27,20 @@
       }
     ]
   },
+  "frame": {
+    "text": "框架",
+    "base": "/java/frame/",
+    "children": [
+      {
+        "text": "Jackson",
+        "link": "jackson"
+      },
+      {
+        "text": "Swagger",
+        "link": "swagger"
+      }
+    ]
+  },
   "knowledge": {
     "text": "Java 知识",
     "base": "/java/knowledge/",
@@ -42,6 +56,14 @@
       {
         "text": "线程池",
         "link": "thread-pool"
+      },
+      {
+        "text": "注解",
+        "link": "annotation"
+      },
+      {
+        "text": "TrueLicense",
+        "link": "truelicense"
       }
     ]
   },
