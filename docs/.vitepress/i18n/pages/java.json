@@ -55,6 +55,24 @@
           "link": "thread-memory-analysis"
         }
       ]
+    },
+    "frame": {
+      "text": "框架",
+      "base": "/java/frame/",
+      "children": [
+        {
+          "text": "Jackson",
+          "link": "jackson"
+        },
+        {
+          "text": "Swagger",
+          "link": "swagger"
+        },
+        {
+          "text": "Netty",
+          "link": "netty"
+        }
+      ]
     }
   }
 }
