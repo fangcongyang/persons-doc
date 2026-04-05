@@ -50,6 +50,10 @@
       {
         "text": "Spring Security",
         "link": "spring-security"
+      },
+      {
+        "text": "Spring MVC",
+        "link": "spring-mvc"
       }
     ]
   },
