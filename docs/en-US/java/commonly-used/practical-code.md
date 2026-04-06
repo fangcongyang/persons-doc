@@ -440,6 +440,180 @@ public class FunctionalProgramming {
 }
 ```
 
+## 正则表达式
+
+### 常用正则表达式匹配
+
+#### 以指定字符拆分字符串
+
+表达式如下：
+`(?&lt;=!|\\.\\.\\.\\.\\.\\.|！|。).+?(?=!|\\.\\.\\.\\.\\.\\.|！|。)`
+
+表达式说明：
+- `(?&lt;=!|......|！)`是一个**后行断言**，表示匹配的子串必须紧跟在`!、......、！`之后，但不包含它们。
+- `.+?`是一个**非贪婪模式**，表示匹配任意字符一次或多次，但尽可能少地匹配。
+- `(?=!|......|！)`是一个**前行断言**，表示匹配的子串必须紧邻在!、......、！之前，但不包含它们。
+
+示例代码：
+```java
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class RegexDemo {
+    public static void main(String[] args) {
+        String str = "!阿达......12123123!1232！";
+        Pattern p = Pattern.compile("(?&lt;=!|\\.{6}|！).+?(?=!|\\.{6}|！)"); //创建正则表达式对象
+        Matcher m = p.matcher(str); //创建匹配器对象
+        while (m.find()) { //循环查找匹配的子串
+            System.out.println(m.group()); //打印匹配的子串
+        }
+    }
+}
+```
+
+执行结果：
+
+```text
+阿达
+12123123
+1232
+```
+
+#### 常用正则表达式工具类
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class RegexUtils {
+    
+    /**
+     * 使用正则表达式提取匹配的所有子串
+     * @param content 原字符串
+     * @param regex 正则表达式
+     * @return 匹配的子串列表
+     */
+    public static List&lt;String&gt; extractMatches(String content, String regex) {
+        List&lt;String&gt; matches = new ArrayList&lt;&gt;();
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(content);
+        
+        while (matcher.find()) {
+            matches.add(matcher.group());
+        }
+        
+        return matches;
+    }
+    
+    /**
+     * 验证字符串是否匹配正则表达式
+     * @param content 待验证的字符串
+     * @param regex 正则表达式
+     * @return 是否匹配
+     */
+    public static boolean matches(String content, String regex) {
+        return Pattern.matches(regex, content);
+    }
+    
+    /**
+     * 提取第一个匹配的子串
+     * @param content 原字符串
+     * @param regex 正则表达式
+     * @return 第一个匹配的子串，如果没有匹配返回null
+     */
+    public static String extractFirstMatch(String content, String regex) {
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(content);
+        
+        if (matcher.find()) {
+            return matcher.group();
+        }
+        
+        return null;
+    }
+    
+    /**
+     * 替换所有匹配的子串
+     * @param content 原字符串
+     * @param regex 正则表达式
+     * @param replacement 替换字符串
+     * @return 替换后的字符串
+     */
+    public static String replaceAll(String content, String regex, String replacement) {
+        return content.replaceAll(regex, replacement);
+    }
+    
+    /**
+     * 替换第一个匹配的子串
+     * @param content 原字符串
+     * @param regex 正则表达式
+     * @param replacement 替换字符串
+     * @return 替换后的字符串
+     */
+    public static String replaceFirst(String content, String regex, String replacement) {
+        return content.replaceFirst(regex, replacement);
+    }
+    
+    /**
+     * 常用正则表达式常量
+     */
+    public static class RegexPatterns {
+        // 邮箱
+        public static final String EMAIL = "^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$";
+        
+        // 手机号（中国）
+        public static final String PHONE_CN = "^1[3-9]\\d{9}$";
+        
+        // 身份证号（18位）
+        public static final String ID_CARD_18 = "^[1-9]\\d{5}(18|19|([23]\\d))\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{3}[0-9Xx]$";
+        
+        // URL
+        public static final String URL = "^(https?|ftp|file)://[-a-zA-Z0-9+&amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&amp;@#/%=~_|]";
+        
+        // IP地址
+        public static final String IP_ADDRESS = "^((25[0-5]|2[0-4]\\d|[01]?\\d\\d?)\\.){3}(25[0-5]|2[0-4]\\d|[01]?\\d\\d?)$";
+        
+        // 数字
+        public static final String NUMBER = "^-?\\d+(\\.\\d+)?$";
+        
+        // 整数
+        public static final String INTEGER = "^-?\\d+$";
+        
+        // 正整数
+        public static final String POSITIVE_INTEGER = "^[1-9]\\d*$";
+        
+        // 中文字符
+        public static final String CHINESE_CHAR = "^[\\u4e00-\\u9fa5]+$";
+        
+        // 日期（YYYY-MM-DD）
+        public static final String DATE_YYYY_MM_DD = "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])$";
+        
+        // 时间（HH:mm:ss）
+        public static final String TIME_HH_MM_SS = "^([01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d$";
+    }
+    
+    public static void main(String[] args) {
+        // 示例1：拆分字符串
+        String str = "!阿达......12123123!1232！";
+        String regex = "(?&lt;=!|\\.{6}|！).+?(?=!|\\.{6}|！)";
+        List&lt;String&gt; results = extractMatches(str, regex);
+        System.out.println("拆分结果: " + results);
+        
+        // 示例2：验证邮箱
+        String email = "test@example.com";
+        boolean isEmailValid = matches(email, RegexPatterns.EMAIL);
+        System.out.println("邮箱是否有效: " + isEmailValid);
+        
+        // 示例3：验证手机号
+        String phone = "13800138000";
+        boolean isPhoneValid = matches(phone, RegexPatterns.PHONE_CN);
+        System.out.println("手机号是否有效: " + isPhoneValid);
+    }
+}
+```
+
 ## 总结
 
 本文档提供了 Java 开发中常用的实用代码片段，包括：
@@ -448,5 +622,6 @@ public class FunctionalProgramming {
 2. **Java 执行命令** - 简单命令和 ProcessBuilder 的使用
 3. **集合优化** - ArrayList 和 HashMap 的初始化优化，Stream 操作
 4. **函数式编程** - Optional、Lambda 表达式和函数接口的使用
+5. **正则表达式** - 常用正则表达式匹配、工具类和常用正则表达式常量
 
 这些代码片段可以直接在项目中使用，提高开发效率。

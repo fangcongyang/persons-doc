@@ -78,12 +78,24 @@
         "link": "thread-pool"
       },
       {
+        "text": "并发锁",
+        "link": "concurrency-lock"
+      },
+      {
         "text": "注解",
         "link": "annotation"
       },
       {
         "text": "TrueLicense",
         "link": "truelicense"
+      },
+      {
+        "text": "位运算",
+        "link": "bitwise-operation"
+      },
+      {
+        "text": "策略模式",
+        "link": "strategy-pattern"
       }
     ]
   },

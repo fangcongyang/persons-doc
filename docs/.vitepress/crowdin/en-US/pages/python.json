@@ -1,0 +1,12 @@
+{
+  "commonly-used": {
+    "text": "常用代码",
+    "base": "/python/commonly-used/",
+    "children": [
+      {
+        "text": "实用代码",
+        "link": "practical-code"
+      }
+    ]
+  }
+}

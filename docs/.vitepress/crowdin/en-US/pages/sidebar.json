@@ -1,5 +1,10 @@
 [
   {
+    "text": "Python",
+    "link": "/python/commonly-used/practical-code",
+    "activeMatch": "/python/"
+  },
+  {
     "text": "java",
     "link": "/java/env",
     "activeMatch": "/java/"
