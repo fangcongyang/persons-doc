@@ -54,6 +54,10 @@
       {
         "text": "Spring MVC",
         "link": "spring-mvc"
+      },
+      {
+        "text": "Spring Boot",
+        "link": "spring-boot"
       }
     ]
   },
