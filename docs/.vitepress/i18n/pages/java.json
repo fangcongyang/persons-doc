@@ -1,82 +1,120 @@
 {
-  "en-US": {
-    "env": {
-      "text": "快速开始",
-      "base": "/java/",
-      "children": [
-        {
-          "text": "环境搭建",
-          "link": "env"
-        }
-      ]
-    },
-    "commonly-used": {
-      "text": "常用代码",
-      "base": "/java/commonly-used/",
-      "children": [
-        {
-          "text": "JSON",
-          "link": "json"
-        },
-        {
-          "text": "Excel",
-          "link": "excel"
-        },
-        {
-          "text": "实用代码",
-          "link": "practical-code"
-        }
-      ]
-    },
-    "knowledge": {
-      "text": "Java 知识",
-      "base": "/java/knowledge/",
-      "children": [
-        {
-          "text": "函数式编程",
-          "link": "functional-programming"
-        },
-        {
-          "text": "Stream",
-          "link": "stream"
-        },
-        {
-          "text": "线程池",
-          "link": "thread-pool"
-        }
-      ]
-    },
-    "performance": {
-      "text": "性能调优",
-      "base": "/java/performance/",
-      "children": [
-        {
-          "text": "线程与内存分析",
-          "link": "thread-memory-analysis"
-        }
-      ]
-    },
-    "frame": {
-      "text": "框架",
-      "base": "/java/frame/",
-      "children": [
-        {
-          "text": "Jackson",
-          "link": "jackson"
-        },
-        {
-          "text": "Swagger",
-          "link": "swagger"
-        },
-        {
-          "text": "Netty",
-          "link": "netty"
-        },
-        {
-          "text": "MyBatis",
-          "link": "mybatis"
-        }
-      ]
-    }
+  "env": {
+    "text": "快速开始",
+    "base": "/java/",
+    "children": [
+      {
+        "text": "环境搭建",
+        "link": "env"
+      }
+    ]
+  },
+  "commonly-used": {
+    "text": "常用代码",
+    "base": "/java/commonly-used/",
+    "children": [
+      {
+        "text": "JSON",
+        "link": "json"
+      },
+      {
+        "text": "Excel",
+        "link": "excel"
+      },
+      {
+        "text": "实用代码",
+        "link": "practical-code"
+      }
+    ]
+  },
+  "frame": {
+    "text": "框架",
+    "base": "/java/frame/",
+    "children": [
+      {
+        "text": "Jackson",
+        "link": "jackson"
+      },
+      {
+        "text": "Swagger",
+        "link": "swagger"
+      },
+      {
+        "text": "MyBatis",
+        "link": "mybatis"
+      },
+      {
+        "text": "Netty",
+        "link": "netty"
+      },
+      {
+        "text": "Spring Security",
+        "link": "spring-security"
+      },
+      {
+        "text": "Spring MVC",
+        "link": "spring-mvc"
+      },
+      {
+        "text": "Spring Boot",
+        "link": "spring-boot"
+      }
+    ]
+  },
+  "knowledge": {
+    "text": "Java 知识",
+    "base": "/java/knowledge/",
+    "children": [
+      {
+        "text": "函数式编程",
+        "link": "functional-programming"
+      },
+      {
+        "text": "Stream",
+        "link": "stream"
+      },
+      {
+        "text": "线程池",
+        "link": "thread-pool"
+      },
+      {
+        "text": "线程创建",
+        "link": "thread-creation"
+      },
+      {
+        "text": "定时任务",
+        "link": "scheduled-executor-service"
+      },
+      {
+        "text": "并发锁",
+        "link": "concurrency-lock"
+      },
+      {
+        "text": "注解",
+        "link": "annotation"
+      },
+      {
+        "text": "TrueLicense",
+        "link": "truelicense"
+      },
+      {
+        "text": "位运算",
+        "link": "bitwise-operation"
+      },
+      {
+        "text": "策略模式",
+        "link": "strategy-pattern"
+      }
+    ]
+  },
+  "performance": {
+    "text": "性能调优",
+    "base": "/java/performance/",
+    "children": [
+      {
+        "text": "线程与内存分析",
+        "link": "thread-memory-analysis"
+      }
+    ]
   }
 }
