@@ -38,5 +38,15 @@
         "link": "common-commands"
       }
     ]
+  },
+  "docker": {
+    "text": "Docker",
+    "base": "/system/docker/",
+    "children": [
+      {
+        "text": "Docker安装指南",
+        "link": "docker-installation"
+      }
+    ]
   }
 }

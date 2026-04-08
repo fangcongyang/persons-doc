@@ -19,6 +19,10 @@
         {
           "text": "Rust Nightly 工具链配置",
           "link": "rust-toolchain-nightly"
+        },
+        {
+          "text": "Tauri版本更新与VSCode配置",
+          "link": "tauri-version-update"
         }
       ]
     }
