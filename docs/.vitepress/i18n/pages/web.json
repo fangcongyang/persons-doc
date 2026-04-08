@@ -15,6 +15,10 @@
         {
           "text": "CSS 资源",
           "link": "css-resources"
+        },
+        {
+          "text": "HTML 字符实体",
+          "link": "html-entities"
         }
       ]
     },

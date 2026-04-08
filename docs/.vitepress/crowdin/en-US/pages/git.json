@@ -4,6 +4,14 @@
     "base": "/git/",
     "children": [
       {
+        "text": "Git安装指南",
+        "link": "git-installation"
+      },
+      {
+        "text": "Git命令参考",
+        "link": "git-commands"
+      },
+      {
         "text": "GitHub认证",
         "link": "github-auth"
       }

@@ -34,5 +34,15 @@
         "link": "oracle-sql"
       }
     ]
+  },
+  "sqlserver": {
+    "text": "SQL Server",
+    "base": "/database/sqlserver/",
+    "children": [
+      {
+        "text": "SQL监控与排查",
+        "link": "sqlserver-monitoring"
+      }
+    ]
   }
 }

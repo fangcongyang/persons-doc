@@ -1,0 +1,20 @@
+{
+  "base": {
+    "text": "Go",
+    "description": "Go 语言编程指南"
+  },
+  "sidebar": {
+    "text": "Go 语言",
+    "base": "/go/",
+    "children": [
+      {
+        "text": "部署指南",
+        "link": "deployment"
+      },
+      {
+        "text": "资源",
+        "link": "resources"
+      }
+    ]
+  }
+}

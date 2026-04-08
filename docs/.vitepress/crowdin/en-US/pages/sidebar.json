@@ -15,6 +15,11 @@
     "activeMatch": "/rust/"
   },
   {
+    "text": "Go",
+    "link": "/go/deployment",
+    "activeMatch": "/go/"
+  },
+  {
     "text": "Git",
     "link": "/git/github-auth",
     "activeMatch": "/git/"

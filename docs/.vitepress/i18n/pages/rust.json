@@ -15,6 +15,10 @@
         {
           "text": "Tauri GitHub打包与自动更新",
           "link": "tauri-github-release"
+        },
+        {
+          "text": "Rust Nightly 工具链配置",
+          "link": "rust-toolchain-nightly"
         }
       ]
     }
