@@ -4,12 +4,20 @@
     "base": "/system/linux/",
     "children": [
       {
+        "text": "RPM包下载",
+        "link": "rpm-package"
+      },
+      {
         "text": "常用命令",
         "link": "common-commands"
       },
       {
         "text": "常见问题",
         "link": "common-faq"
+      },
+      {
+        "text": "Buffer/Cache内存",
+        "link": "buffer-cache"
       },
       {
         "text": "Docker镜像源",
