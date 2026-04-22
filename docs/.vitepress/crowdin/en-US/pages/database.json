@@ -26,6 +26,10 @@
       {
         "text": "MyBatis + PostgreSQL 流式查询与事务冲突",
         "link": "mybatis-postgres-streaming-query"
+      },
+      {
+        "text": "explain analyze",
+        "link": "explain-analyze"
       }
     ]
   },
